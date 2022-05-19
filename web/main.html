@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VRising Server Settings</title>
+    <script type="text/javascript" src="./eel.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body onload="setup();">
+<h1 id="pageTitle">Loading...</h1>
+<button class="pure-material-button-contained" onclick="changeServer()">Change Server</button>
+<form>
+    <br>
+    <label class="pure-material-switch">
+        <input type="checkbox" id="globalChat">
+        <span>Allow Global Chat</span>
+    </label>
+    <br>
+    <label class="pure-material-textfield-standard">
+        <input type="text" id="serverName" placeholder=" ">
+        <span>Server Name</span>
+    </label>
+    <br>
+    <label class="pure-material-textfield-standard">
+        <input type="password" id="serverPass" placeholder=" ">
+        <span>Password</span>
+    </label>
+    <label class="pure-material-switch">
+        <input type="checkbox" id="showPass" onclick="updatePasswordVisibility()">
+        <span>Show?</span>
+    </label>
+    <br>
+    <label class="pure-material-textfield-standard">
+        <input type="text" id="maxPlayers" placeholder=" ">
+        <span>Max Connected Players</span>
+    </label>
+    <br>
+    <button class="pure-material-button-contained" onclick="update()">Update</button>
+</form>
+
+<form>
+    <br><br><br>
+    <label class="pure-material-switch">
+        <input type="checkbox" id="gameModeSwitch">
+        <span>PVP</span>
+    </label>
+    <label class="pure-material-switch">
+        <input type="checkbox" id="containerLoot">
+        <span>Everyone can loot containers</span>
+    </label>
+    <br>
+     <div class="select">
+        <select class="select-text" id="castleDamageMode">
+            <option value="" disabled selected></option>
+            <option value="2">Always</option>
+            <option value="1">Never</option>
+            <option value="0">Time Restricted</option>
+        </select>
+        <span class="select-highlight"></span>
+        <span class="select-bar"></span>
+        <label class="select-label">Castle Damage Mode</label>
+    </div>
+     <div class="select">
+        <select class="select-text" id="castleHeartDamageMode">
+            <option value="" disabled selected></option>
+            <option value="0">Can be destroyed while decaying</option>
+            <option value="1">Can be destroyed only</option>
+            <option value="2">Can be destroyed or seized</option>
+        </select>
+        <span class="select-highlight"></span>
+        <span class="select-bar"></span>
+        <label class="select-label">Heart Damage Mode</label>
+    </div>
+    <button class="pure-material-button-contained" onclick="updatePVP()">Update</button>
+</form>
+
+<form>
+    <br><br><br>
+    <label class="pure-material-switch">
+        <input type="checkbox" id="relicSpawnType">
+        <span>Plentiful Relics</span>
+    </label>
+    <label class="pure-material-switch">
+        <input type="checkbox" id="bloodBoundEquipment">
+        <span>Equipment bloodbound?</span>
+    </label>
+    <br>
+    <label class="pure-material-switch">
+        <input type="checkbox" id="teleportBoundItems">
+        <span>Can bloodbound items teleport?</span>
+    </label>
+    <br>
+    <button class="pure-material-button-contained" onclick="updateBoundItems()">Update</button>
+</form>
+
+</body>
+
+</html>
