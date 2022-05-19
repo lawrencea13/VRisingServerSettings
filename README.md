@@ -29,6 +29,7 @@ To run this in python, you will need to install the eel dependency with "pip ins
 - BloodEssenceYieldModifer
 - ClanSize
 - Considering doing 1 update button instead of separate groups.
+- Visual Updates of course
 
 ### Currently known issues
 - Will crash or hand if loading invalid data, rather than handle the exception
