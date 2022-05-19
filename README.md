@@ -19,3 +19,17 @@
 ## I intend on adding every setting, however this will take time.
 
 ### The program is written in Python, and can be run as bare python.  I have also made a binary executable for windows so you don't have to do anything.
+To run this in python, you will need to install the eel dependency with "pip install eel".
+
+### Next Planned Settings/updates(hopefully by tomorrow)
+- InventoryStacksModifier
+- DropTableModifiers
+- MaterialYieldModifier
+- EnemyContainerLoot
+- BloodEssenceYieldModifer
+- ClanSize
+- Considering doing 1 update button instead of separate groups.
+
+### Currently known issues
+- Will crash or hand if loading invalid data, rather than handle the exception
+- If reload page too quickly, it may fail
