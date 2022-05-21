@@ -1,6 +1,7 @@
 # VRisingServerSettings
 
 ## Made to make updating your private server simple.
+## Download the current release [here.](https://github.com/lawrencea13/VRisingServerSettings/releases/tag/Update1)
 
 ## Please make sure to backup the entire save, including server settings, if a file is in the process of being written to, and something crashes or fails, you run the risk of losing everything.
 
