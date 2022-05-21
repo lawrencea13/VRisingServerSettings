@@ -1,0 +1,42 @@
+.neu-button {
+    box-shadow: inset rgb(0,0,0) 0 0 1rem, inset rgb(0,0,0) 0 0 1rem;
+}
+
+.neu {
+    border-radius: 3rem;
+    height: 27rem;
+    box-shadow: inset rgb(0,0,0) 0 0 10rem;
+}
+
+.neu-top-left {
+    border-top-left-radius: 3rem;
+}
+
+.neu-top-right {
+    border-top-right-radius: 3rem;
+}
+
+
+
+input[type=range]::-webkit-slider-runnable-track {
+ /* track color */
+  background: white;
+  border-radius: 3px;
+  height: 5px;
+  -webkit-appearance: none;
+}
+
+/* input[type=range]::-moz-range-thumb */
+/* input[type=range]::-ms-thumb */
+input[type=range]::-webkit-slider-thumb {
+  border: none;
+  box-shadow: none;
+  height: 20px;
+  width: 6px;
+  border-radius: 12px;
+  background: #0097f0;
+  -webkit-appearance: none;
+  margin: -7px 0 0 0;
+  outline: none;
+}
+
