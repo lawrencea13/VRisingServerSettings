@@ -7,6 +7,9 @@ function update(){
         eel.setPassword(document.getElementById("serverPass").value)
     }
 
+    updateYields()
+    updatePVP()
+    updateBoundItems()
 }
 
 function changeServer() {
@@ -22,7 +25,7 @@ async function setup() {
     var castleMode = await eel.getCastleMode()();
     var castleHeartMode = await eel.getCastleHeartMode()();
     var max = await eel.getServerMaxPlayers()();
-    var d_ContainerLoot = await eel.getLootEnemyContainer()();
+    var d_ContainerLoot = await eel.getLootEnemyDContainer()();
     var globalChat = await eel.getGlobalChat()();
 
     var relics = await eel.getRelicSpawn()();
@@ -66,6 +69,54 @@ async function setup() {
     document.getElementById("castleDamageMode").value = castleMode;
     document.getElementById("castleHeartDamageMode").value = castleHeartMode;
 
+    const clanSlider = document.getElementById("maxClanSize");
+    const bloodEssenceSlider = document.getElementById("bloodEssenceYield");
+    const materialSlider = document.getElementById("materialYield");
+    const dropTableSlider = document.getElementById("dropTableYield");
+    const inventorySlider = document.getElementById("inventoryStack");
+
+    var maxClan = await eel.getMaxClanSize()();
+    var inventoryStack = await eel.getInventoryStacksMod()();
+    var dropTable = await eel.getDropTableModG()();
+    var matYield = await eel.getMaterialYieldModG()();
+    var bloodEssenceYield = await eel.getBloodEssenceYieldMod()();
+
+    clanSlider.value = maxClan;
+    bloodEssenceSlider.value = bloodEssenceYield;
+    materialSlider.value = matYield;
+    dropTableSlider.value = dropTable;
+    inventorySlider.value = inventoryStack;
+
+    document.getElementById("clanSizeOutput").innerHTML = maxClan
+    document.getElementById("bloodEssenceOutput").innerHTML = bloodEssenceYield
+    document.getElementById("materialYieldOutput").innerHTML = matYield
+    document.getElementById("dropTableOutput").innerHTML = dropTable
+    document.getElementById("inventoryStackOutput").innerHTML = inventoryStack
+
+    bloodEssenceSlider.setAttribute("step", "0.1");
+    materialSlider.setAttribute("step", "0.1");
+    dropTableSlider.setAttribute("step", "0.1");
+    inventorySlider.setAttribute("step", "0.1");
+
+
+    clanSlider.addEventListener('input', updateValue);
+    clanSlider.targetOutput = document.getElementById("clanSizeOutput");
+
+    bloodEssenceSlider.addEventListener('input', updateValue);
+    bloodEssenceSlider.targetOutput = document.getElementById("bloodEssenceOutput");
+
+    materialSlider.addEventListener('input', updateValue);
+    materialSlider.targetOutput = document.getElementById("materialYieldOutput");
+
+    dropTableSlider.addEventListener('input', updateValue);
+    dropTableSlider.targetOutput = document.getElementById("dropTableOutput");
+
+    inventorySlider.addEventListener('input', updateValue);
+    inventorySlider.targetOutput = document.getElementById("inventoryStackOutput");
+
+    function updateValue(e) {
+    e.currentTarget.targetOutput.innerHTML = e.target.value;
+    }
 }
 
 function updatePVP() {
@@ -77,10 +128,10 @@ function updatePVP() {
     }
 
     if (document.getElementById("containerLoot").checked) {
-        eel.setLootEnemyContainer(1)
+        eel.setLootEnemyDContainer(1)
     }
     else {
-        eel.setLootEnemyContainer(0)
+        eel.setLootEnemyDContainer(0)
     }
 
     eel.setCastleHeartMode(document.getElementById("castleHeartDamageMode").value)
@@ -95,10 +146,25 @@ function updateBoundItems(){
     }
     else { eel.setRelicSpawn("0"); }
 
+
 }
 
 function updatePasswordVisibility(){
     var x = document.getElementById("serverPass");
     if (x.type === "password") { x.type = "text"; }
     else { x.type = "password"; }
+}
+
+function updateYields() {
+    const clanSliderVal = document.getElementById("maxClanSize").value;
+    const bloodEssenceSliderVal = document.getElementById("bloodEssenceYield").value;
+    const materialSliderVal = document.getElementById("materialYield").value;
+    const dropTableSliderVal = document.getElementById("dropTableYield").value;
+    const inventorySliderVal = document.getElementById("inventoryStack").value;
+
+    eel.setMaxClanSize(clanSliderVal);
+    eel.setInventoryStacksMod(inventorySliderVal);
+    eel.setDropTableModG(dropTableSliderVal);
+    eel.setMaterialYieldModG(materialSliderVal);
+    eel.setBloodEssenceYieldMod(bloodEssenceSliderVal);
 }

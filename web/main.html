@@ -36,7 +36,7 @@
         <span>Max Connected Players</span>
     </label>
     <br>
-    <button class="pure-material-button-contained" onclick="update()">Update</button>
+<!--    <button class="pure-material-button-contained" onclick="update()">Update</button>-->
 </form>
 
 <form>
@@ -47,7 +47,7 @@
     </label>
     <label class="pure-material-switch">
         <input type="checkbox" id="containerLoot">
-        <span>Everyone can loot containers</span>
+        <span>Everyone can loot death containers?</span>
     </label>
     <br>
      <div class="select">
@@ -72,7 +72,7 @@
         <span class="select-bar"></span>
         <label class="select-label">Heart Damage Mode</label>
     </div>
-    <button class="pure-material-button-contained" onclick="updatePVP()">Update</button>
+<!--    <button class="pure-material-button-contained" onclick="updatePVP()">Update</button>-->
 </form>
 
 <form>
@@ -91,7 +91,41 @@
         <span>Can bloodbound items teleport?</span>
     </label>
     <br>
-    <button class="pure-material-button-contained" onclick="updateBoundItems()">Update</button>
+<!--    <button class="pure-material-button-contained" onclick="updateBoundItems()">Update</button>-->
+</form>
+
+<form>
+    <br><br><br>
+    <label class="pure-material-switch">
+        <input type="checkbox" id="lootEnemyContainer">
+        <span>Everyone can loot enemy containers?</span>
+    </label>
+    <div class="slidecontainer">
+        <input type="range" min="1" max="10" class="slider" id="maxClanSize">
+        <div>Max Clan Size:<span id="clanSizeOutput"></span></div>
+    </div>
+    <br>
+    <div class="slidecontainer">
+        <input type="range" min="0.1" max="10" class="slider" id="bloodEssenceYield">
+        <div>Max Clan Size:<span id="bloodEssenceOutput"></span></div>
+    </div>
+    <br>
+    <div class="slidecontainer">
+        <input type="range" min="0.1" max="10" class="slider" id="materialYield">
+        <div>Material Yield Modifier:<span id="materialYieldOutput"></span></div>
+    </div>
+    <br>
+    <div class="slidecontainer">
+        <input type="range" min="0.1" max="10" class="slider" id="dropTableYield">
+        <div>Drop table Yield Modifer:<span id="dropTableOutput"></span></div>
+    </div>
+    <br>
+    <div class="slidecontainer">
+        <input type="range" min="0.1" max="10" class="slider" id="inventoryStack">
+        <div>Inventory Stack Modifier:<span id="inventoryStackOutput"></span></div>
+    </div>
+    <br>
+    <button class="pure-material-button-contained" onclick="update()">Update</button>
 </form>
 
 </body>

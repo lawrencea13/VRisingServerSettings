@@ -127,15 +127,21 @@ def updateHostSettings(name=None, maxUsers=None):
 
 @eel.expose
 def getTitle():
-    return server["Name"]
+    try:
+        return server["Name"]
+    except:
+        pass
 
 
 @eel.expose
 def getPVP():
-    if game["GameModeType"] == 0:
-        return "PVE"
-    else:
-        return "PVP"
+    try:
+        if game["GameModeType"] == 0:
+            return "PVE"
+        else:
+            return "PVP"
+    except:
+        pass
 
 
 @eel.expose
@@ -148,17 +154,25 @@ def setPVP(mode):
     saveData(game_settings_dir, game)
 
 @eel.expose
-def getLootEnemyContainer():
-    return str(game["DeathContainerPermission"])
+def getLootEnemyDContainer():
+    try:
+        return str(game["DeathContainerPermission"])
+    except:
+        pass
+
 
 @eel.expose
-def setLootEnemyContainer(loot):
+def setLootEnemyDContainer(loot):
     game["DeathContainerPermission"] = int(loot)
     saveData(game_settings_dir, game)
 
 @eel.expose
 def getCastleMode():
-    return str(game["CastleDamageMode"])
+    try:
+        return str(game["CastleDamageMode"])
+    except:
+        pass
+
 
 @eel.expose
 def setCastleMode(mode):
@@ -167,7 +181,11 @@ def setCastleMode(mode):
 
 @eel.expose
 def getCastleHeartMode():
-    return str(game["CastleHeartDamageMode"])
+    try:
+        return str(game["CastleHeartDamageMode"])
+    except:
+        pass
+
 
 @eel.expose
 def setCastleHeartMode(mode):
@@ -176,7 +194,10 @@ def setCastleHeartMode(mode):
 
 @eel.expose
 def getRelicSpawn():
-    return game['RelicSpawnType']
+    try:
+        return game['RelicSpawnType']
+    except:
+        pass
 
 
 @eel.expose
@@ -186,7 +207,11 @@ def setRelicSpawn(mode):
 
 @eel.expose
 def getEquipmentBound():
-    return game['BloodBoundEquipment']
+    try:
+        return game['BloodBoundEquipment']
+    except:
+        pass
+
 
 @eel.expose
 def setEquipmentBound(mode):
@@ -195,7 +220,11 @@ def setEquipmentBound(mode):
 
 @eel.expose
 def getBoundTeleport():
-    return game['TeleportBoundItems']
+    try:
+        return game['TeleportBoundItems']
+    except:
+        pass
+
 
 @eel.expose
 def setBoundTeleport(mode):
@@ -204,7 +233,11 @@ def setBoundTeleport(mode):
 
 @eel.expose
 def getGlobalChat():
-    return game['AllowGlobalChat']
+    try:
+        return game['AllowGlobalChat']
+    except:
+        pass
+
 
 @eel.expose
 def setGlobalChat(mode):
@@ -212,9 +245,91 @@ def setGlobalChat(mode):
     saveData(game_settings_dir, game)
 
 
+
+
+
+@eel.expose
+def getLootEnemyContainer():
+    try:
+        return game["CanLootEnemyContainers"]
+    except:
+        pass
+
+
+@eel.expose
+def setLootEnemyContainer(mode):
+    game["CanLootEnemyContainers"] = mode
+    saveData(game_settings_dir, game)
+
+
+@eel.expose
+def getInventoryStacksMod():
+    try:
+        return game["InventoryStacksModifier"]
+    except:
+        pass
+
+
+@eel.expose
+def setInventoryStacksMod(value):
+    game["InventoryStacksModifier"] = value
+    saveData(game_settings_dir, game)
+
+@eel.expose
+def getDropTableModG():
+    try:
+        return game["DropTableModifier_General"]
+    except:
+        pass
+
+
+@eel.expose
+def setDropTableModG(value):
+    game["DropTableModifier_General"] = value
+    saveData(game_settings_dir, game)
+
+@eel.expose
+def getMaterialYieldModG():
+    try:
+        return game["MaterialYieldModifier_Global"]
+    except:
+        pass
+
+
+@eel.expose
+def setMaterialYieldModG(value):
+    game["MaterialYieldModifier_Global"] = value
+    saveData(game_settings_dir, game)
+
+@eel.expose
+def getBloodEssenceYieldMod():
+    try:
+        return game["BloodEssenceYieldModifier"]
+    except:
+        pass
+
+
+@eel.expose
+def setBloodEssenceYieldMod(value):
+    game["BloodEssenceYieldModifier"] = value
+    saveData(game_settings_dir, game)
+
+@eel.expose
+def getMaxClanSize():
+    try:
+        return game["ClanSize"]
+    except:
+        return 4
+
+@eel.expose
+def setMaxClanSize(value):
+    game["ClanSize"] = value
+    saveData(game_settings_dir, game)
+
+
 main()
 
-eel.start('main.html')
+eel.start('main.html', mode='default')
 
 
 
