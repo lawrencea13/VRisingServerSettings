@@ -31,11 +31,35 @@ To run this in python, you will need to install the eel dependency with "pip ins
 ### Next Planned Settings/updates
 
 - Visual Updates
+- Dedicated Server support
+- Ability to migrate from a private server to a dedicated server
+- CastleMinimumDistanceInFloors
+- BloodDrainModifier
+- DurabilityDraginModifier
+- GarlicAreaStrengthModifier
+- SilverStrengthModifier
+- SunDamageModifier
+- CastleDecayRateModifier
+- CastleBloodEssenceDrainModifier
+- AnnounceSiegeWeaponSpawn
+- BuildCostModifier
+- CraftRateModifier
+- RefinementCostModifier
+- RefinementRateModifier
+- DismantleResourceModifier
+- ServantConvertRateModifier
+- Death_DurabilityFactorLoss
+- Death_DurabilityLossFactorAsResources
+
+### Planned backend changed
+
+- JS reorganization: Update the JS to align more with the output. E.g. instead of updating with different functions, incorporate the whole update page to 1 function
+- Python code cleanup and rewrite: Rewrite the python so I don't need to make a "getter" and "setter" for each value, instead I can call 1 get/set function and indicate the data I'd like to pull, making adding future settings a lot easier.
 
 ### Fixed Bugs
 
 - Previously would open only in chrome, now it will open in default browser
+- Will crash or hand if loading invalid data, rather than handle the exception.  Now it will not crash if data is not valid, it will ignore that data, then create it upon next save at the default state.  This can potentially fix a corrupted server if the settings prevented it from loading previously.
 
 ### Currently known issues
-- Will crash or hand if loading invalid data, rather than handle the exception
 - If reload page too quickly, it may fail
