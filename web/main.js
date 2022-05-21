@@ -12,6 +12,13 @@ function update(){
     updateBoundItems()
 }
 
+async function changeServerType() {
+    var dedicatedServer = await eel.getServerMode()();
+    eel.setServerMode(!dedicatedServer);
+    location.reload();
+}
+
+
 function changeServer() {
     eel.changeSelectedFolder();
     location.reload();
@@ -19,7 +26,22 @@ function changeServer() {
 
 async function setup() {
     document.getElementById("showPass").checked = false;
+    var dedicatedServer = await eel.getServerMode()();
 
+//    dedicated server setup
+    var serverModeButton = document.getElementById("serverTypeButton");
+    var modalText = document.getElementById("popupText");
+
+    console.log(dedicatedServer)
+
+    if (dedicatedServer) {
+        serverModeButton.innerHTML = "Dedicated";
+        modalText.innerHTML = "Are you sure you'd like to change server mode? This will not affect your server, but will change this application to Private mode.";
+    }
+    else{ serverModeButton.innerHTML = "Private"; modalText.innerHTML = "Are you sure you'd like to change server mode? This will not affect your server, but will change this application to Dedicated mode."; };
+
+
+//    end dedicated server setup
     var title = await eel.getTitle()();
     var pvp = await eel.getPVP()();
     var castleMode = await eel.getCastleMode()();

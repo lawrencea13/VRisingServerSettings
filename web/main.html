@@ -1,57 +1,70 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="viewport">
     <title>VRising Server Settings</title>
     <script type="text/javascript" src="./eel.js"></script>
     <script type="text/javascript" src="main.js"></script>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet" href="style.css">
 </head>
-<body onload="setup();">
-<h1 id="pageTitle">Loading...</h1>
-<button class="pure-material-button-contained" onclick="changeServer()">Change Server</button>
-<form>
-    <br>
-    <label class="pure-material-switch">
-        <input type="checkbox" id="globalChat">
-        <span>Allow Global Chat</span>
-    </label>
-    <br>
-    <label class="pure-material-textfield-standard">
-        <input type="text" id="serverName" placeholder=" ">
-        <span>Server Name</span>
-    </label>
-    <br>
-    <label class="pure-material-textfield-standard">
-        <input type="password" id="serverPass" placeholder=" ">
-        <span>Password</span>
-    </label>
-    <label class="pure-material-switch">
-        <input type="checkbox" id="showPass" onclick="updatePasswordVisibility()">
-        <span>Show?</span>
-    </label>
-    <br>
-    <label class="pure-material-textfield-standard">
-        <input type="text" id="maxPlayers" placeholder=" ">
-        <span>Max Connected Players</span>
-    </label>
-    <br>
-<!--    <button class="pure-material-button-contained" onclick="update()">Update</button>-->
-</form>
+<body class="bg-dark text-white" onload="setup();">
 
-<form>
-    <br><br><br>
-    <label class="pure-material-switch">
-        <input type="checkbox" id="gameModeSwitch">
-        <span>PVP</span>
-    </label>
-    <label class="pure-material-switch">
-        <input type="checkbox" id="containerLoot">
-        <span>Everyone can loot death containers?</span>
-    </label>
-    <br>
+<!-- Modal -->
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content bg-dark">
+      <div class="modal-header bg-dark">
+        <h5 class="modal-title" id="exampleModalLongTitle">Server Mode</h5>
+        <button type="button" class="btn btn-secondary close neu-button" data-bs-dismiss="modal" aria-label="Close">
+          &times;
+        </button>
+      </div>
+      <div class="modal-body" id="popupText">
+        Are you sure you'd like to change server mode?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary neu-button" data-bs-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-primary neu-button" onclick="changeServerType()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h1 id="pageTitle" class="m-3">Loading...</h1>
+<button class="btn btn-outline-secondary bottom neu-button m-3" onclick="changeServer()">Change Server</button>
+<button type="button" class="btn btn-outline-secondary bottom neu-button m-3" id="serverTypeButton" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Private</button>
+<div class="m-3">
+    <form class="row gy-2 gx-3 align-items-center p-auto">
+        <br>
+        <div class="input-group flex-nowrap w-25 bg-dark">
+            <span class="input-group-text bg-dark text-light neu-button" id="addon-wrapping">Server Name</span>
+            <input type="text" id="serverName" class="form-control bg-dark text-light neu-button" placeholder="Server Name" aria-label="Server name" aria-describedby="addon-wrapping">
+        </div>
+        <br>
+        <div class="input-group flex-nowrap w-25 bg-dark">
+            <span class="input-group-text bg-dark text-light neu-button" id="addon-wrapping">Password</span>
+            <input type="password" id="serverPass" class="form-control bg-dark text-light neu-button" placeholder="Password" aria-label="Password" aria-describedby="addon-wrapping">
+        </div>
+        <label class="form-check col-auto">
+            <input type="checkbox" id="showPass" class="form-check-input" onclick="updatePasswordVisibility()">
+            <label class="form-check-label" for="showPass">
+                Show?
+            </label>
+        </label>
+        <div class="input-group flex-nowrap w-25 bg-dark">
+            <span class="input-group-text bg-dark text-light neu-button" id="addon-wrapping">Max Players</span>
+            <input type="text" id="maxPlayers" class="form-control bg-dark text-light neu-button" placeholder="Max Players" aria-label="Max Players" aria-describedby="addon-wrapping">
+        </div>
+    <!--    <button class="pure-material-button-contained" onclick="update()">Update</button>-->
+    </form>
+</div>
+
+<form class="m-3">
+    <br><br>
+    <label class="select-label">Castle Damage Mode</label>
      <div class="select">
-        <select class="select-text" id="castleDamageMode">
+        <select class="select-text form-select w-25 bg-dark text-light neu-button" id="castleDamageMode">
             <option value="" disabled selected></option>
             <option value="2">Always</option>
             <option value="1">Never</option>
@@ -59,10 +72,12 @@
         </select>
         <span class="select-highlight"></span>
         <span class="select-bar"></span>
-        <label class="select-label">Castle Damage Mode</label>
+
     </div>
+    <br>
+    <label class="select-label">Heart Damage Mode</label>
      <div class="select">
-        <select class="select-text" id="castleHeartDamageMode">
+        <select class="select-text form-select w-25 bg-dark text-light neu-button" id="castleHeartDamageMode">
             <option value="" disabled selected></option>
             <option value="0">Can be destroyed while decaying</option>
             <option value="1">Can be destroyed only</option>
@@ -70,64 +85,89 @@
         </select>
         <span class="select-highlight"></span>
         <span class="select-bar"></span>
-        <label class="select-label">Heart Damage Mode</label>
+
     </div>
 <!--    <button class="pure-material-button-contained" onclick="updatePVP()">Update</button>-->
 </form>
 
-<form>
-    <br><br><br>
+<form class="w-25 m-3">
+
+    <div>
+        <input type="checkbox" class="form-check-input neu-button" id="gameModeSwitch">
+        <label class="form-check-label" for="gameModeSwitch">
+            PVP
+        </label>
+    </div>
+    <div class="pure-material-switch">
+        <input type="checkbox" class="form-check-input neu-button" id="globalChat">
+        <label class="form-check-label" for="globalChat">
+            Global Chat
+        </label>
+    </div>
+    <div>
+        <input type="checkbox" class="form-check-input neu-button" id="containerLoot">
+        <label class="form-check-label" for="containerLoot">
+            Can everyone loot death containers?
+        </label>
+    </div>
+    <div class="pure-material-switch">
+        <input type="checkbox" class="form-check-input neu-button" id="relicSpawnType">
+        <label class="form-check-label" for="relicSpawnType">
+            Plentiful Relics
+        </label>
+    </div>
     <label class="pure-material-switch">
-        <input type="checkbox" id="relicSpawnType">
-        <span>Plentiful Relics</span>
-    </label>
-    <label class="pure-material-switch">
-        <input type="checkbox" id="bloodBoundEquipment">
-        <span>Equipment bloodbound?</span>
+        <input type="checkbox" class="form-check-input neu-button" id="bloodBoundEquipment">
+        <label class="form-check-label" for="bloodBoundEquipment">
+            Equipment bloodbound?
+        </label>
     </label>
     <br>
-    <label class="pure-material-switch">
-        <input type="checkbox" id="teleportBoundItems">
-        <span>Can bloodbound items teleport?</span>
-    </label>
-    <br>
+    <div class="pure-material-switch">
+        <input type="checkbox" class="form-check-input neu-button" id="teleportBoundItems">
+        <label class="form-check-label" for="teleportBoundItems">
+            Can bloodbound items teleport?
+        </label>
+    </div>
+    <div class="pure-material-switch">
+        <input type="checkbox" class="form-check-input neu-button" id="lootEnemyContainer">
+        <label class="form-check-label" for="lootEnemyContainer">
+            Can everyone loot enemy containers?
+        </label>
+    </div>
 <!--    <button class="pure-material-button-contained" onclick="updateBoundItems()">Update</button>-->
 </form>
 
-<form>
-    <br><br><br>
-    <label class="pure-material-switch">
-        <input type="checkbox" id="lootEnemyContainer">
-        <span>Everyone can loot enemy containers?</span>
-    </label>
-    <div class="slidecontainer">
-        <input type="range" min="1" max="10" class="slider" id="maxClanSize">
-        <div>Max Clan Size:<span id="clanSizeOutput"></span></div>
-    </div>
-    <br>
-    <div class="slidecontainer">
-        <input type="range" min="0.1" max="10" class="slider" id="bloodEssenceYield">
-        <div>Max Clan Size:<span id="bloodEssenceOutput"></span></div>
-    </div>
-    <br>
-    <div class="slidecontainer">
-        <input type="range" min="0.1" max="10" class="slider" id="materialYield">
-        <div>Material Yield Modifier:<span id="materialYieldOutput"></span></div>
-    </div>
-    <br>
-    <div class="slidecontainer">
-        <input type="range" min="0.1" max="10" class="slider" id="dropTableYield">
-        <div>Drop table Yield Modifer:<span id="dropTableOutput"></span></div>
-    </div>
-    <br>
-    <div class="slidecontainer">
-        <input type="range" min="0.1" max="10" class="slider" id="inventoryStack">
-        <div>Inventory Stack Modifier:<span id="inventoryStackOutput"></span></div>
-    </div>
-    <br>
-    <button class="pure-material-button-contained" onclick="update()">Update</button>
-</form>
+<form class="m-3">
 
+    <div class="slidecontainer w-25 custom-range-slider range">
+        <input type="range" min="1" max="10" class="slider form-range" id="maxClanSize">
+        <div>Max Clan Size: <span id="clanSizeOutput"></span></div>
+    </div>
+    <br>
+    <div class="slidecontainer w-25 custom-range-slider range">
+        <input type="range" min="0.1" max="10" class="slider form-range" id="bloodEssenceYield">
+        <div>Blood Essence Yield: <span id="bloodEssenceOutput"></span></div>
+    </div>
+    <br>
+    <div class="slidecontainer w-25 custom-range-slider range">
+        <input type="range" min="0.1" max="10" class="slider form-range" id="materialYield">
+        <div>Material Yield Modifier: <span id="materialYieldOutput"></span></div>
+    </div>
+    <br>
+    <div class="slidecontainer w-25 custom-range-slider range">
+        <input type="range" min="0.1" max="10" class="slider form-range" id="dropTableYield">
+        <div>Drop table Yield Modifer: <span id="dropTableOutput"></span></div>
+    </div>
+    <br>
+    <div class="slidecontainer w-25 custom-range-slider range">
+        <input type="range" min="0.1" max="10" class="slider form-range" id="inventoryStack">
+        <div>Inventory Stack Modifier: <span id="inventoryStackOutput"></span></div>
+    </div>
+    <br>
+    <button class="btn btn-outline-secondary bottom neu-button" onclick="update()">Update</button>
+</form>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 
 </html>
