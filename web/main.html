@@ -33,7 +33,7 @@
 
 <h1 id="pageTitle" class="m-3">Loading...</h1>
 <button class="btn btn-outline-secondary bottom neu-button m-3" onclick="changeServer()">Change Server</button>
-<button type="button" class="btn btn-outline-secondary bottom neu-button m-3" id="serverTypeButton" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Private</button>
+<!--<button type="button" class="btn btn-outline-secondary bottom neu-button m-3" id="serverTypeButton" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Private</button>-->
 <div class="m-3">
     <form class="row gy-2 gx-3 align-items-center p-auto">
         <br>
@@ -163,6 +163,11 @@
     <div class="slidecontainer w-25 custom-range-slider range">
         <input type="range" min="0.1" max="10" class="slider form-range" id="inventoryStack">
         <div>Inventory Stack Modifier: <span id="inventoryStackOutput"></span></div>
+    </div>
+    <br>
+    <div class="slidecontainer w-25 custom-range-slider range">
+        <input type="range" min="0.1" max="10" class="slider form-range" id="sunDamageMod">
+        <div>Sun Damage Modifier: <span id="sunDamageOutput"></span></div>
     </div>
     <br>
     <button class="btn btn-outline-secondary bottom neu-button" onclick="update()">Update</button>

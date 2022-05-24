@@ -13,9 +13,9 @@ function update(){
 }
 
 async function changeServerType() {
-    var dedicatedServer = await eel.getServerMode()();
-    eel.setServerMode(!dedicatedServer);
-    location.reload();
+//    var dedicatedServer = await eel.getServerMode()();
+//    eel.setServerMode(!dedicatedServer);
+//    location.reload();
 }
 
 
@@ -26,20 +26,20 @@ function changeServer() {
 
 async function setup() {
     document.getElementById("showPass").checked = false;
-    var dedicatedServer = await eel.getServerMode()();
+//    var dedicatedServer = await eel.getServerMode()();
 
 //    dedicated server setup
-    var serverModeButton = document.getElementById("serverTypeButton");
-    var modalText = document.getElementById("popupText");
+//    var serverModeButton = document.getElementById("serverTypeButton");
+//    var modalText = document.getElementById("popupText");
 
-    console.log(dedicatedServer)
-
-    if (dedicatedServer) {
-        serverModeButton.innerHTML = "Dedicated";
-        modalText.innerHTML = "Are you sure you'd like to change server mode? This will not affect your server, but will change this application to Private mode.";
-    }
-    else{ serverModeButton.innerHTML = "Private"; modalText.innerHTML = "Are you sure you'd like to change server mode? This will not affect your server, but will change this application to Dedicated mode."; };
-
+//    console.log(dedicatedServer)
+//
+//    if (dedicatedServer) {
+//        serverModeButton.innerHTML = "Dedicated";
+//        modalText.innerHTML = "Are you sure you'd like to change server mode? This will not affect your server, but will change this application to Private mode.";
+//    }
+//    else{ serverModeButton.innerHTML = "Private"; modalText.innerHTML = "Are you sure you'd like to change server mode? This will not affect your server, but will change this application to Dedicated mode."; };
+//
 
 //    end dedicated server setup
     var title = await eel.getTitle()();
@@ -96,31 +96,37 @@ async function setup() {
     const materialSlider = document.getElementById("materialYield");
     const dropTableSlider = document.getElementById("dropTableYield");
     const inventorySlider = document.getElementById("inventoryStack");
+    const sunDamageModSlider = document.getElementById("sunDamageMod");
 
     var maxClan = await eel.getMaxClanSize()();
     var inventoryStack = await eel.getInventoryStacksMod()();
     var dropTable = await eel.getDropTableModG()();
     var matYield = await eel.getMaterialYieldModG()();
     var bloodEssenceYield = await eel.getBloodEssenceYieldMod()();
+    var sunDamageMod = await eel.getSunDamage()();
 
+    sunDamageModSlider.value = sunDamageMod;
     clanSlider.value = maxClan;
     bloodEssenceSlider.value = bloodEssenceYield;
     materialSlider.value = matYield;
     dropTableSlider.value = dropTable;
     inventorySlider.value = inventoryStack;
 
+    document.getElementById("sunDamageOutput").innerHTML = sunDamageMod
     document.getElementById("clanSizeOutput").innerHTML = maxClan
     document.getElementById("bloodEssenceOutput").innerHTML = bloodEssenceYield
     document.getElementById("materialYieldOutput").innerHTML = matYield
     document.getElementById("dropTableOutput").innerHTML = dropTable
     document.getElementById("inventoryStackOutput").innerHTML = inventoryStack
 
+    sunDamageModSlider.setAttribute("step", "0.1");
     bloodEssenceSlider.setAttribute("step", "0.1");
     materialSlider.setAttribute("step", "0.1");
     dropTableSlider.setAttribute("step", "0.1");
     inventorySlider.setAttribute("step", "0.1");
 
-
+    sunDamageModSlider.addEventListener('input', updateValue)
+    sunDamageModSlider.targetOutput = document.getElementById("sunDamageOutput")
     clanSlider.addEventListener('input', updateValue);
     clanSlider.targetOutput = document.getElementById("clanSizeOutput");
 
@@ -183,7 +189,9 @@ function updateYields() {
     const materialSliderVal = document.getElementById("materialYield").value;
     const dropTableSliderVal = document.getElementById("dropTableYield").value;
     const inventorySliderVal = document.getElementById("inventoryStack").value;
+    const sunDamageModVal = document.getElementById("sunDamageMod").value;
 
+    eel.setSunDamage(sunDamageModVal);
     eel.setMaxClanSize(clanSliderVal);
     eel.setInventoryStacksMod(inventorySliderVal);
     eel.setDropTableModG(dropTableSliderVal);
