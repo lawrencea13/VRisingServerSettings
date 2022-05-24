@@ -326,12 +326,19 @@ def setMaxClanSize(value):
     game["ClanSize"] = value
     saveData(game_settings_dir, game)
 
+@eel.expose
+def setSunDamage(value):
+    game["SunDamageModifier"] = value
+    saveData(game_settings_dir, game)
+
+@eel.expose
+def getSunDamage():
+    try:
+        return game["SunDamageModifier"]
+    except:
+        pass
+
 
 main()
 
 eel.start('main.html', mode='default')
-
-
-
-
-
