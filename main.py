@@ -108,7 +108,10 @@ def changeSelectedFolder():
 
 @eel.expose
 def getServerMaxPlayers():
-    return server['MaxConnectedUsers']
+    try:
+        return server['MaxConnectedUsers']
+    except:
+        return 40
 
 
 @eel.expose
