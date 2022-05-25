@@ -12,6 +12,10 @@ function update(){
     updateBoundItems()
 }
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function changeServerType() {
 //    var dedicatedServer = await eel.getServerMode()();
 //    eel.setServerMode(!dedicatedServer);
@@ -20,11 +24,47 @@ async function changeServerType() {
 
 
 function changeServer() {
-    eel.changeSelectedFolder();
-    location.reload();
+    window.location.replace("serverselect.html")
+//    window.location.href = "serverselect.html"
+}
+
+
+function selectServer(server) {
+    eel.newSelectServer(server)
+    window.location.replace("main.html")
+//    window.location.href = "main.html"
+}
+
+
+async function customSetup() {
+    await sleep(1000);
+    var servers = await eel.getServerFolders()();
+    console.log(servers)
+    for (let i = 0; i < servers.length; i++) {
+        const button = document.createElement("button")
+        button.innerText = i;
+        if (servers[i] != ""){ button.innerHTML = "<h2>" + servers[i] + "</h2>"; }
+        else { button.innerHTML = "<h2>" + "Server missing Name." + "</h2>"; }
+
+        button.classList.add("btn", "btn-outline-secondary", "bottom", "neu-button", "w-50");
+
+        button.addEventListener("click", function() {
+            selectServer(i)
+        })
+        document.body.appendChild(button);
+    }
 }
 
 async function setup() {
+    await sleep(1000);
+    let btn = document.createElement("button")
+    btn.innerText = "Change Server"
+    btn.classList.add("btn", "btn-outline-secondary", "bottom", "neu-button", "m-3")
+    btn.addEventListener("click", function() {
+        changeServer();
+    });
+    document.getElementById("serverChangeContainer").appendChild(btn);
+
     document.getElementById("showPass").checked = false;
 //    var dedicatedServer = await eel.getServerMode()();
 
