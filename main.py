@@ -6,14 +6,18 @@ import os
 
 eel.init('web')
 
+gameShortcut = "\\ServerGameSettings.json"
+settingsShortcut = "\\ServerHostSettings.json"
+
 # get the localLow directory where server settings are saved
-baseDir = os.path.join(os.getenv('APPDATA'), '..\\LocalLow\\Stunlock Studios\\VRising\\Saves\\V1')
+baseDir = os.getenv('UserProfile') + '\\AppData\\LocalLow\\Stunlock Studios\\VRising\\Saves\\V1\\'
 serverDirName = ""
 game_settings_dir = ""
 host_settings_dir = ""
 server = {}
 game = {}
 local_data = {}
+returned_servers = []
 
 
 root = tk.Tk()
@@ -47,13 +51,19 @@ def attemptLoadSettings(folder):
         game = loadData(game_settings_dir)
         serverDirName = os.path.basename(os.path.dirname(host_settings_dir))
         local_data['path'] = serverDirName
-    except:
+    except Exception as e:
+        print(e)
         firstTimeSetup()
 
     saveData('localdata.txt', local_data)
 
 
 def firstTimeSetup():
+    """
+    Trying to remove tkinter from the libraries, unless absolutely needed.
+    :return:
+    """
+    print(os.getenv('UserProfile'))
     folder_selected = filedialog.askdirectory(initialdir=baseDir)
     if folder_selected == "":
         exit()
@@ -69,9 +79,27 @@ def main():
         global local_data
         local_data = loadData("localdata.txt")
         attemptLoadSettings(os.path.join(baseDir, local_data['path']))
+        eel.start('main.html', mode='default')
     else:
-        firstTimeSetup()
+        eel.start('serverselect.html', mode='default')
 
+@eel.expose
+def getServerFolders():
+    global returned_servers
+    returned_servers = []
+    returnData = []
+    for folder in os.listdir(baseDir):
+        l_serverData = loadData(baseDir + "\\" + folder + settingsShortcut)
+        # l_gameData = loadData(baseDir + "\\" + folder + gameShortcut)
+        returnData.append(l_serverData["Name"])
+        returned_servers.append(folder)
+
+    return returnData
+
+@eel.expose
+def newSelectServer(server):
+    # print(baseDir + returned_servers[server])
+    attemptLoadSettings(baseDir + returned_servers[server])
 
 @eel.expose
 def getPassword():
@@ -344,4 +372,4 @@ def getSunDamage():
 
 main()
 
-eel.start('main.html', mode='default')
+
