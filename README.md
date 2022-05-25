@@ -22,6 +22,7 @@
 - EnemyContainerLoot
 - BloodEssenceYieldModifer
 - ClanSize
+- SunDamageModifier
 
 ## I intend on adding every setting, however this will take time.
 
@@ -38,7 +39,6 @@ To run this in python, you will need to install the eel dependency with "pip ins
 - DurabilityDraginModifier
 - GarlicAreaStrengthModifier
 - SilverStrengthModifier
-- SunDamageModifier
 - CastleDecayRateModifier
 - CastleBloodEssenceDrainModifier
 - AnnounceSiegeWeaponSpawn
